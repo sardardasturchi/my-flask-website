@@ -9,7 +9,7 @@ from flask import (
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 
-app = Flask(name)
+app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
 
 DB_NAME = "finance.db"
