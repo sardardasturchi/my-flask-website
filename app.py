@@ -294,5 +294,5 @@ def delete_saving(saving_id):
 
 init_db()
 
-if name == "main":
+if __name__ == "__main__":
     app.run(debug=True)
