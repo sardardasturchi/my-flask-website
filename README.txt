@@ -1,25 +1,21 @@
-MYFINANCE 2.0 — расширенная версия
+# FinTrack
 
-Разделы:
-- Обзор: баланс, доходы, расходы, долги и сбережения
-- Доходы и расходы: добавление, редактирование, удаление, история, фильтр
-- Категории: добавление и удаление собственных категорий
-- Долги: «я должен» и «мне должны», отметка о закрытии
-- Сбережения: цели, прогресс, пополнение и удаление
+## Deploy to Render
+1. Upload `app.py`, `requirements.txt`, and `render.yaml` to the root of your GitHub repository.
+2. In Render, create a Blueprint from this repository (recommended) so Render creates the PostgreSQL database and web service.
+3. If configuring manually, create a PostgreSQL database and set `DATABASE_URL` on the web service to its Internal Database URL.
+4. Set `SECRET_KEY` to a long random secret (or let Render generate it).
+5. Build command: `pip install -r requirements.txt`
+6. Start command: `gunicorn app:app`
 
-УСТАНОВКА / ЗАПУСК В WINDOWS:
-1. Распакуйте архив.
-2. Откройте папку проекта в PowerShell.
-3. Выполните:
-   python -m pip install -r requirements.txt
-   python app.py
-4. Откройте http://127.0.0.1:5000
+## Features
+- Individual user accounts and password hashing
+- Default UZS and USD balances for every new user
+- Additional wallets in UZS, USD, EUR, RUB, KZT, TRY, SAR, AED
+- Income, expense and same-currency transfers
+- Balance-specific transaction history and filters
+- Savings goals tracked separately from account balances
+- CSRF protection on forms
+- PostgreSQL on Render; SQLite fallback for local development
 
-ВАЖНО:
-- Перед заменой старого app.py сделайте копию папки проекта.
-- Если у вас уже есть finance.db из первой версии, положите его рядом с новым app.py.
-  Старые записи о доходах/расходах сохранятся; новые столбцы будут добавлены не автоматически,
-  но приложение использует account с безопасным значением по умолчанию в SQLite.
-- Для многопользовательских аккаунтов, облачного доступа, паролей и PostgreSQL потребуется
-  следующий этап разработки. Сейчас это локальная версия для одного компьютера.
-- Долги и сбережения пока ведутся как отдельные записи и не меняют автоматически баланс операций.
+Important: balances in different currencies are deliberately not combined into one total. No exchange rate is guessed or applied. Cross-currency exchange is not implemented as a transfer.
