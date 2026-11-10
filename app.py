@@ -292,6 +292,7 @@ def delete_saving(saving_id):
     with connect() as con: con.execute("DELETE FROM savings WHERE id=?",(saving_id,))
     flash("Цель удалена.");return redirect(url_for("savings"))
 
-if __name__ == "__main__":
-    init_db()
+init_db()
+
+if name == "main":
     app.run(debug=True)
